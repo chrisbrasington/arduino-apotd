@@ -7,6 +7,8 @@ byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 char server[] = "192.168.11.50";
 String dataLocation = "/test.txt HTTP/1.1";
 
+boolean done = false;
+
 EthernetClient client;
 String currentLine = "";            // string for incoming serial data
 String currRates = "";
@@ -56,19 +58,29 @@ void loop() {
       currentLine += inChar;
  
       // if you get a newline, clear the line:
-      if (inChar == '\n') {
-        currentLine = "";
-      }
-      else {
-        Serial.println(currentLine);
-      }
+      //if (inChar == '\n') {
+      //  currentLine = "";
+      //}
+      //else {
+      //  Serial.println(currentLine);
+      //}
 
   }
+
  
   else if (millis() - lastAttemptTime > requestInterval) {
     // if you're not connected, and requestInterval has passed since
     // your last connection, then attempt to connect again:
     connectToServer();
+  }
+    else
+  {
+    if(currentLine != "" && !done)
+    {
+      Serial.println(currentLine);
+      done = true;
+    }
+
   }
 }
 }
