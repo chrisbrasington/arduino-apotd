@@ -15,6 +15,8 @@ String currRates = "";
 boolean readingRates = false;       // is reading?
 const int requestInterval = 900000; // ms delay between requests (15 min)
 
+int newLineCounter = 0;
+
 boolean requested;         // whether you've made a request since connecting
 long lastAttemptTime = 0;  // last time you connected to the server, in ms
 
